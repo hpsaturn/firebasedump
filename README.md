@@ -1,70 +1,25 @@
-# CanAirIO Realtime Database #
+# Realtime Database Dump #
 
-This README would normally document whatever steps are necessary to get your application up and running.
+This tool dump the full database or any child of the any Firebase Realtime database
 
-## Database Structure
-
-The database has three data schemas:
-
-**tracks_info**: Info of current devices. Each device endpoint has the sessions ids of each tracking without the data of track. This data is in track_data.  
-
-**tracks_data**: With the same endpoint that track_info, this path in firebase has the all data of each track session.  
-
-**tracks_ctrl**: With this endpoint we have the control to set the interval time or enable/disable the background service.
-
-# Python API
-
-## Prerequisites
-
-- GNU Linux or compatible OS
-- Python3
-
-## Installation Firebase Admin
-
-Please first install on a python virtual env, `firebase_admin`
-
-```bash
-python3 -m venv venv
-cd venv/ && source bin/activate
-python -m pip install --upgrade setuptools
-pip install -U pip
-pip install firebase_admin
-```
-
-## Testing connection
-
-For example in `ipython` or Python `console` test it:
+## Usage
 
 ```python
-import firebase_admin
-from firebase_admin import db
-cred = firebase_admin.credentials.Certificate('kcanariesdb-firebase-admin.json')
-firebase_admin.initialize_app(cred,{'databaseURL':'https://kcanariesdb.firebaseio.com/'})
-```
 
-Output:
+firebasedump -- utility for dump data from Firebase database
 
-```python
-<firebase_admin.App at 0x7f0a9fdcb1d0>
-```
+Usage:
+  firebasedump  (-d <database> -c <credentials>) <dbtarget> 
+  firebasedump  [--verbose] (-d <database> -c <credentials>) <dbtarget> [<output>]
+  firebasedump -h | --help
+  firebasedump -v | --version
 
-For more information [here](https://firebase.google.com/docs/admin/setup#python)
+Options:
+  -h --help                     Show help screen.
+  -v --version                  Show version.
+  -d db, --database db          Url path of your database
+  -c cd, --credentials cd       Path of your credentials (json file)
+  -s, --verbose                 Enable logs
+  dbtarget                      Database target path for dump i.e: /users
 
-## Retrive devices info
-
-On `track_info` have the list of devices without data of tracking, only the info of each track session of each device:
-
-```python
-ref = db.reference('/tracks_info')
-print(ref.get())
-```
-
-## Retrive device data
-
-With a some `deviceId` from `tracks_info` you can retrive the tracking that of device:
-
-```python
-ref = db.reference('/track_data/b25b006ef2da3748')
-print(ref.get())
-```
-
+``` 
