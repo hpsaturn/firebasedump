@@ -25,12 +25,12 @@ if __name__ == '__main__':
           points.append(point)
   print("points: %i" % len(points))
   geojs={
-    "type": "featurecollection",
+    "type": "FeatureCollection",
     "features":[
         {
-            "type":"feature",
+            "type":"Feature",
             "geometry": {
-                "type":"point",
+                "type":"Point",
                 "coordinates":[d['lon'],d['lat']]
                 },
             "properties":d,
