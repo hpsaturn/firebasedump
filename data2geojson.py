@@ -38,7 +38,6 @@ if __name__ == '__main__':
         ]
     }
   output_file=open("geo"+target, "w", encoding="utf-8")
-  # json.dump(geojs, output_file)
   json.dump(geojs, output_file)
   output_file.close()
   
