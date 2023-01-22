@@ -37,7 +37,8 @@ def dumpdb(target, output):
 
   try:
     with open(out, 'w') as cf:
-        cf.write(json.dumps(db.reference(target).get()))
+        cf.write(json.dumps(db.reference(target).order_by_child(
+            'name').limit_to_last(1000).get()))
   except:
       raise IOError('Error in saving data to file!!\n')
 
